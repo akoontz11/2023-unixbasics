@@ -95,7 +95,7 @@ man ls
 ```
 You can use the space bar to scroll through the man page, and can press ***q*** to quit. 
 
-Let's sort the instructor materials by the most recently modified with the `-t` flag. What else do you use often or could be useful? 
+Let's sort the demoFolder by the most recently modified with the `-t` flag. What else do you use often or could be useful? 
 
 ```{bash}
 ls demoFolder -t
@@ -155,7 +155,7 @@ cd
 
 ## Let's start by downloading a practice data set. 
 
-Yay! Your first sequencing run is done and you've received an email from the sequencing facility that your data are ready. Now what?? Depending on the facility, you may use `ftp`, `wget`, or `curl` to download the data. Today, we'll use `wget` (World Wide Web get). The `-O` argument specifes the filename to save the file to.
+Your first sequencing run is done and you've received an email from the sequencing facility that your data are ready. Now what?? Depending on the facility, you may use `ftp`, `wget`, or `curl` to download the data. Today, we'll use `wget` (World Wide Web get). The `-O` argument specifes the filename to save the file to.
 
 ```{bash}
 wget https://www.dropbox.com/s/y44fa4zjboiq8ko/ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz?dl=0 -O ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz
@@ -165,18 +165,18 @@ wget https://www.dropbox.com/s/tthl4xdt7in5k7z/ATGCCGCT-CTCCTTAC_S152_L002_R2_00
 These commands will download a set of forward (R1) and reverse (R2) RADseq reads from _Quercus boyntonii_. You should always try to look at the data, even if you process the bulk of it with a program. Take a look at one of these files. 
 
 ```{bash}
-cat S144_L006_R1_sub.fastq.gz
+cat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz
 ```
 
 AH! Too much data and it looks garbled, too. Hit **Ctl+c (^c)** to quit a running process or abort a task. I use this more often than I care to admit. You can see that the file is of type "fastq.gz" where the ".gz" indicates the file has been compressed. File compression can save huge amounts of space! For today, though, let's uncompress the files. We can also use the `clear` command to clear the current screen.  
 
 ```{bash}
 clear
-gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz > S144_L006_R1_sub.fastq
-gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz > S144_L006_R2_sub.fastq
+gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz > QUBO_S152_R1.fastq
+gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz > QUBO_S152_R2.fastq
 ```
 
-The '>' redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. We'll learn more about how multiple commands can be pieced together during next week's session. 
+The '>' is an ***operator*** redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. Other operators are the '>>' and '|' characters.
 
 Let's use our familiar `ls` command with some additional options, to see the difference in file size between compressed and uncompressed files. Again, the 'l' stands for 'long' format, which means more detailed information is provided for each file. The 'h' means 'human-readable' file sizes, and 't' sorts by date modified. Don't forget you can always use `man ls` to see all the detailed options. 
 
@@ -207,7 +207,7 @@ One of the first things I do when I get new data is I make a backup of it that i
 
 ```{bash}
 mkdir data_backup
-mv S144_L006_R*_sub.fastq.gz data_backup
+mv ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz data_backup
 cd data_backup
 ls -l
 ```
@@ -216,7 +216,7 @@ These commands make a copy of the data in a new directory called "data_backup", 
 We can then modify the permissions of files using the command `chmod` and flags to add or remove read, write, or execute ability. Our goal for now is to change permissions on this file so that you (the owner) no longer have write permissions. We can do this using the `chmod` (change mode) command and subtracting (-) the write permission -w.
 
 ```{bash}
-chmod -w S144_L006_R*_sub.fastq.gz
+chmod -w ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz
 ```
 We can use our `ls` again to check that we've changed the permissions. 
 
@@ -227,17 +227,10 @@ ls -l
 And, we can prove to ourselves that we have modified the permissions by trying to delete the files using `rm`
 
 ```{bash}
-rm S144_L006_R*_sub.fastq.gz
+rm ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz
 ```
 
 The output should ask if you actually want to remove the write-protected files. You should answer with an 'n'. If you say yes, you will remove the file forever! Using the command `rmdir` will delete directories. 
-
-Finally, we can use the command `mv` in a different context to rename the files to indicate they are a backup. 
-
-```{bash}
-mv S144_L006_R1_sub.fastq.gz S144_L006_R1_sub_backup.fastq.gz
-mv S144_L006_R2_sub.fastq.gz S144_L006_R2_sub_backup.fastq.gz
-```
 
 Moving forward, as you create files and directories, remember: 
 * File names that start with a period are hidden. You can view them with **ls -a**
@@ -253,7 +246,7 @@ To assess how much free disk space is available, you can use the `df` (display f
 ```{bash}
 df -h
 ```
-Since most or all of us are using the AWS setup for ConGen, a lot of these directories may be unfamiliar. On my lab server, it looks more like this: 
+On my lab server, it looks more like this: 
 
 <img width="555" alt="Screen Shot 2021-08-24 at 10 20 49 AM" src="https://user-images.githubusercontent.com/10552484/130654957-ecd42c05-e6ef-4b68-9b89-9c6e152bb29a.png">
 
@@ -398,6 +391,53 @@ total 1796
 Let's look at the output. We can't view html reports on the remote server, so you could copy the file back to your own laptop. Within RStudio, however, we are able to open the html files we have generated by selecting the "Files" tab in the bottom right corner of RStudio, then navigating to our 'quality_metrics' directory. Open the html report in your web browser. How do you think the sequencing run went? 
 
 Hopefully today's lesson has helped you feel more comfortable working from the command line in UNIX. The more you practice, the easier and more fluid it will be!
+
+<bonusExercise>
+## What sort of resources do I have available on a computer?
+
+Often, we run analyses on a variety of computers, including our own laptop, a shared lab server, or an institution-wide cluster. Before I start a new project or set of analyses, I like to see how resources are available for me to download data, generate files, run multiple jobs, etc. 
+
+To assess how much free disk space is available, you can use the `df` (display free disk space) command. 
+
+```{bash}
+df -h
+```
+On my lab server, it looks more like this: 
+
+<img width="555" alt="Screen Shot 2021-08-24 at 10 20 49 AM" src="https://user-images.githubusercontent.com/10552484/130654957-ecd42c05-e6ef-4b68-9b89-9c6e152bb29a.png">
+
+To check how much space a single directory takes up (say, your /user directory which you may have been told to keep under a certain size), you can use `du` (display disk usage statistics), 
+
+```{bash}
+du -ha 
+```
+This will display the file size in human readable format (-h) for all files (-a) within the current directory, with a total at the bottom. If you only want to display the usage for a particular directory and not all of its subdirectories, you can do so, too. 
+
+```{bash}
+du -hd1 [directory name]
+```
+This will provide the file sizes of subdirectories to a depth only one below the current one (-d1). 
+
+**Exercise 2: How much space do our raw data files take up?**
+<details>
+	You can use the du command for the data_backup directory
+	```{bash}
+	du -hd1 ../data_backup/
+	```
+	This specifies that our data_backup directory uses 114 MB of space.
+	</details>
+
+Some genomic software is very memory intensive, or for java programs, we can tell java how much memory to use, so it would be helpful to know what we have available on a computer. One way we can do this is with the `free` command. 
+
+```{bash}
+free -mh
+```
+This will tell us, in human-readable format, the total installed memory (i.e. total RAM), the used memory (memory in use by the operating system/processes), and free (any memory not in use). The "available" value is what you might want to pay attention to, since it provides an estimate of how much memory is available for starting new applications, without swapping. Read more about interpreting the output of `free` here: https://stackoverflow.com/questions/6345020/what-is-the-difference-between-buffer-and-cache-memory-in-linux
+
+Before we submit jobs, we also might want to know the status of our system, and what processes are running, so that we can decide how many jobs we can submit simultaneously. We can see what is currently running on a computer using either `top` or `htop`. `top` is the default on most linux systems, but `htop` is more straightforward to interpet. Read more about them here: https://www.unixtutorial.org/commands/top and https://htop.dev/
+
+Note that if your server has a queueing system, such as qsub, your job submission process will be different, and the queueing software will help manage CPU and memory usage. 
+</bonusExercise>
 
 # Other resources
 
