@@ -419,13 +419,13 @@ du -hd1 [directory name]
 This will provide the file sizes of subdirectories to a depth only one below the current one (-d1). 
 
 **Exercise 2: How much space do our raw data files take up?**
-<details>
+    <details>
 	You can use the du command for the data_backup directory
 	```{bash}
 	du -hd1 ../data_backup/
 	```
 	This specifies that our data_backup directory uses 114 MB of space.
-	</details>
+	    </details>
 
 Some genomic software is very memory intensive, or for java programs, we can tell java how much memory to use, so it would be helpful to know what we have available on a computer. One way we can do this is with the `free` command. 
 
@@ -437,7 +437,7 @@ This will tell us, in human-readable format, the total installed memory (i.e. to
 Before we submit jobs, we also might want to know the status of our system, and what processes are running, so that we can decide how many jobs we can submit simultaneously. We can see what is currently running on a computer using either `top` or `htop`. `top` is the default on most linux systems, but `htop` is more straightforward to interpet. Read more about them here: https://www.unixtutorial.org/commands/top and https://htop.dev/
 
 Note that if your server has a queueing system, such as qsub, your job submission process will be different, and the queueing software will help manage CPU and memory usage. 
-</bonusExercise>
+  </bonusExercise>
 
 # Other resources
 
