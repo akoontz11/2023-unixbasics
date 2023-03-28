@@ -176,7 +176,7 @@ gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz > QUBO_S152_R1.fastq
 gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz > QUBO_S152_R2.fastq
 ```
 
-The '>' is an ***operator*** redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. Other operators are the '>>' and '|' characters.
+The '>' is an ***operator*** , which redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. Other operators are the '>>' and '|' characters.
 
 Let's use our familiar `ls` command with some additional options, to see the difference in file size between compressed and uncompressed files. Again, the 'l' stands for 'long' format, which means more detailed information is provided for each file. The 'h' means 'human-readable' file sizes, and 't' sorts by date modified. Don't forget you can always use `man ls` to see all the detailed options. 
 
@@ -204,7 +204,6 @@ This long version of the directory gives us quite a bit of information!
 ## Modifying permissions and backing up your raw data 
 
 One of the first things I do when I get new data is I make a backup of it that is write protected. Let's do that now using the `mv` command. Depending on how it is used, `mv` can either rename a file or move a file to somewhere else.  
-
 ```{bash}
 mkdir data_backup
 mv ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz data_backup
@@ -235,52 +234,10 @@ The output should ask if you actually want to remove the write-protected files. 
 Moving forward, as you create files and directories, remember: 
 * File names that start with a period are hidden. You can view them with **ls -a**
 * Bash is case-sensitive. file1.txt and File1.txt are different. Be consistent. 
-* Do not (!!) embed spaces in file names. Use file1 or File_1 or file-1 or SnakeCase. I prefer underscores because R interprets - as subtraction, and I prefer starting filenames with lower case so I don't have to type in the upper case letter each time.  
+* Do not (!!) embed spaces in file names. Use file1 or File_1 or file-1 or SnakeCase. I prefer underscores because R interprets - as subtraction.  
 
-## What sort of resources do I have available on a computer?
-
-Often, we run analyses on a variety of computers, including our own laptop, a shared lab server, or an institution-wide cluster. Before I start a new project or set of analyses, I like to see how resources are available for me to download data, generate files, run multiple jobs, etc. 
-
-To assess how much free disk space is available, you can use the `df` (display free disk space) command. 
-
-```{bash}
-df -h
-```
-On my lab server, it looks more like this: 
-
-<img width="555" alt="Screen Shot 2021-08-24 at 10 20 49 AM" src="https://user-images.githubusercontent.com/10552484/130654957-ecd42c05-e6ef-4b68-9b89-9c6e152bb29a.png">
-
-To check how much space a single directory takes up (say, your /user directory which you may have been told to keep under a certain size), you can use `du` (display disk usage statistics), 
-
-```{bash}
-du -ha 
-```
-This will display the file size in human readable format (-h) for all files (-a) within the current directory, with a total at the bottom. If you only want to display the usage for a particular directory and not all of its subdirectories, you can do so, too. 
-
-```{bash}
-du -hd1 [directory name]
-```
-This will provide the file sizes of subdirectories to a depth only one below the current one (-d1). 
-
-**Exercise 2: How much space do our raw data files take up?**
-<details>
-	You can use the du command for the data_backup directory
-	```{bash}
-	du -hd1 ../data_backup/
-	```
-	This specifies that our data_backup directory uses 114 MB of space.
-	</details>
-
-Some genomic software is very memory intensive, or for java programs, we can tell java how much memory to use, so it would be helpful to know what we have available on a computer. One way we can do this is with the `free` command. 
-
-```{bash}
-free -mh
-```
-This will tell us, in human-readable format, the total installed memory (i.e. total RAM), the used memory (memory in use by the operating system/processes), and free (any memory not in use). The "available" value is what you might want to pay attention to, since it provides an estimate of how much memory is available for starting new applications, without swapping. Read more about interpreting the output of `free` here: https://stackoverflow.com/questions/6345020/what-is-the-difference-between-buffer-and-cache-memory-in-linux
-
-Before we submit jobs, we also might want to know the status of our system, and what processes are running, so that we can decide how many jobs we can submit simultaneously. We can see what is currently running on a computer using either `top` or `htop`. `top` is the default on most linux systems, but `htop` is more straightforward to interpet. Read more about them here: https://www.unixtutorial.org/commands/top and https://htop.dev/
-
-Note that if your server has a queueing system, such as qsub, your job submission process will be different, and the queueing software will help manage CPU and memory usage. 
+### Processing
+Before we submit jobs, we might want to know the status of our system, and what processes are running, so that we can decide how many jobs we can submit simultaneously. We can see what is currently running on a computer using either `htop`, which you can read more about [here](https://htop.dev/).
 
 ## Viewing files
 
@@ -294,28 +251,21 @@ mv *.fastq raw_fastq
 Let's look at the first few lines of one of our fastq files with the command `head`. 
 
 ```{bash}
-head raw_fastq/S144_L006_R1_sub.fastq
+head raw_fastq/QUBO_S152_R1.fastq
 ```
 
 You can do the same with `tail` for the end of the file. Both commands have an option `-n` for the number of lines. 
 
 ```{bash}
-tail -n 4 raw_fastq/S144_L006_R1_sub.fastq
+tail -n 4 raw_fastq/QUBO_S152_R1.fastq
 ```
-
-Just a side note that you can make your cursor jump around the command line by using some handy shortcuts, e.g. 
-- **Ctl+a (^a)** moves your cursor to the beginning of the line
-- **Ctl+e (^e)** moves your cursor to the end of the line
-- **Ctl+w (^w)** deletes the word to the left of your cursor
-- **Ctl+u (^u)** deletes everything to the left of your cursor
-- **Ctl+k (^k)** deletes everything to the right of your cursor
 
 It's useful to know about the fastqc file encoding: https://en.wikipedia.org/wiki/FASTQ_format. Fastqc uses these data to generate a really useful report. 
 
 Let's check how many reads we have in each file using `wc` (word count). By default, using `wc` on a file gives three columns with the number of lines, the number of words, and the number of characters. We can ask for only the number of lines using the `-l` flag. 
 
 ```{bash}
-wc -l raw_fastq/S144_L006_R*_sub.fastq
+wc -l raw_fastq/QUBO_S152_R1.fastq
 ```
 **Exercise 3: How many reads are there?**
 <details>
@@ -325,8 +275,8 @@ wc -l raw_fastq/S144_L006_R*_sub.fastq
 Given how large these files are, it is not useful to use `cat` to try to look at them. We can view parts of the file using `more` or `less`. Like the manual pages, we can use the space bar to scroll, and the 'q' to quit. Can you tell what the difference is between the two commands? 
 		
 ```{bash}
-more raw_fastq/S144_L006_R1_sub.fastq
-less raw_fastq/S144_L006_R1_sub.fastq		
+more raw_fastq/QUBO_S152_R1.fastq
+less raw_fastq/QUBO_S152_R1.fastq		
 ```
 
 # Fastqc
@@ -352,8 +302,8 @@ ls raw_fastq/*.fastq
 
 Returns: 
 ```{bash}
-raw_fastq/S144_L006_R1_sub.fastq
-raw_fastq/S144_L006_R2_sub.fastq
+raw_fastq/QUBO_S152_R1.fastq
+raw_fastq/QUBO_S152_R2.fastq
 ```
 
 ## Run FastQC
@@ -379,10 +329,10 @@ ls -l quality_metrics/
 
 ```{bash}
 total 1796
--rw-r--r-- 1 user10 user10 592881 Aug 23 10:51 S144_L006_R1_sub_fastqc.html
--rw-r--r-- 1 user10 user10 311361 Aug 23 10:51 S144_L006_R1_sub_fastqc.zip
--rw-r--r-- 1 user10 user10 603773 Aug 23 10:51 S144_L006_R2_sub_fastqc.html
--rw-r--r-- 1 user10 user10 323468 Aug 23 10:51 S144_L006_R2_sub_fastqc.zip
+-rw-r--r-- 1 user10 user10 592881 Aug 23 10:51 QUBO_S152_R1_fastqc.html
+-rw-r--r-- 1 user10 user10 311361 Aug 23 10:51 QUBO_S152_R1_sub_fastqc.zip
+-rw-r--r-- 1 user10 user10 603773 Aug 23 10:51 QUBO_S152_R2_sub_fastqc.html
+-rw-r--r-- 1 user10 user10 323468 Aug 23 10:51 QUBO_S152_R2_sub_fastqc.zip
 ```
 	
 - The ".html" is the FastQC report, in HTML format.
@@ -391,53 +341,6 @@ total 1796
 Let's look at the output. We can't view html reports on the remote server, so you could copy the file back to your own laptop. Within RStudio, however, we are able to open the html files we have generated by selecting the "Files" tab in the bottom right corner of RStudio, then navigating to our 'quality_metrics' directory. Open the html report in your web browser. How do you think the sequencing run went? 
 
 Hopefully today's lesson has helped you feel more comfortable working from the command line in UNIX. The more you practice, the easier and more fluid it will be!
-
-<bonusExercise>
-## What sort of resources do I have available on a computer?
-
-Often, we run analyses on a variety of computers, including our own laptop, a shared lab server, or an institution-wide cluster. Before I start a new project or set of analyses, I like to see how resources are available for me to download data, generate files, run multiple jobs, etc. 
-
-To assess how much free disk space is available, you can use the `df` (display free disk space) command. 
-
-```{bash}
-df -h
-```
-On my lab server, it looks more like this: 
-
-<img width="555" alt="Screen Shot 2021-08-24 at 10 20 49 AM" src="https://user-images.githubusercontent.com/10552484/130654957-ecd42c05-e6ef-4b68-9b89-9c6e152bb29a.png">
-
-To check how much space a single directory takes up (say, your /user directory which you may have been told to keep under a certain size), you can use `du` (display disk usage statistics), 
-
-```{bash}
-du -ha 
-```
-This will display the file size in human readable format (-h) for all files (-a) within the current directory, with a total at the bottom. If you only want to display the usage for a particular directory and not all of its subdirectories, you can do so, too. 
-
-```{bash}
-du -hd1 [directory name]
-```
-This will provide the file sizes of subdirectories to a depth only one below the current one (-d1). 
-
-**Exercise 2: How much space do our raw data files take up?**
-    <details>
-	You can use the du command for the data_backup directory
-	```{bash}
-	du -hd1 ../data_backup/
-	```
-	This specifies that our data_backup directory uses 114 MB of space.
-	    </details>
-
-Some genomic software is very memory intensive, or for java programs, we can tell java how much memory to use, so it would be helpful to know what we have available on a computer. One way we can do this is with the `free` command. 
-
-```{bash}
-free -mh
-```
-This will tell us, in human-readable format, the total installed memory (i.e. total RAM), the used memory (memory in use by the operating system/processes), and free (any memory not in use). The "available" value is what you might want to pay attention to, since it provides an estimate of how much memory is available for starting new applications, without swapping. Read more about interpreting the output of `free` here: https://stackoverflow.com/questions/6345020/what-is-the-difference-between-buffer-and-cache-memory-in-linux
-
-Before we submit jobs, we also might want to know the status of our system, and what processes are running, so that we can decide how many jobs we can submit simultaneously. We can see what is currently running on a computer using either `top` or `htop`. `top` is the default on most linux systems, but `htop` is more straightforward to interpet. Read more about them here: https://www.unixtutorial.org/commands/top and https://htop.dev/
-
-Note that if your server has a queueing system, such as qsub, your job submission process will be different, and the queueing software will help manage CPU and memory usage. 
-  </bonusExercise>
 
 # Other resources
 
