@@ -95,7 +95,7 @@ man ls
 ```
 You can use the space bar to scroll through the man page, and can press ***q*** to quit. 
 
-Let's sort the demoFolder by the most recently modified with the `-t` flag. What else do you use often or could be useful? 
+Let's sort the demoFolder by the most recently modified with the `-t` flag. For more advanced users: what else do you use often? 
 
 ```{bash}
 ls demoFolder -t
@@ -148,21 +148,16 @@ If you execute `cd` without any arguments, it will take you back home.
 cd
 ```
 
-Let's prepare to download and view some data by changing to our user directory folder. 
-```{bash}
-cd 
-```
-
 ## Let's start by downloading a practice data set. 
 
-Your first sequencing run is done and you've received an email from the sequencing facility that your data are ready. Now what?? Depending on the facility, you may use `ftp`, `wget`, or `curl` to download the data. Today, we'll use `wget` (World Wide Web get). The `-O` argument specifes the filename to save the file to.
+Your first sequencing run is done and you've received an email from the sequencing facility that your data are ready. Now what? Depending on the facility, you may use `ftp`, `wget`, or `curl` to download the data. Today, we'll use `wget` (World Wide Web get). The `-O` argument specifies the filename to save the file to.
 
 ```{bash}
 wget https://www.dropbox.com/s/y44fa4zjboiq8ko/ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz?dl=0 -O ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz
 wget https://www.dropbox.com/s/tthl4xdt7in5k7z/ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz?dl=0 -O ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz
 ```
 
-These commands will download a set of forward (R1) and reverse (R2) RADseq reads from _Quercus boyntonii_. You should always try to look at the data, even if you process the bulk of it with a program. Take a look at one of these files. 
+These commands will download a set of forward (R1) and reverse (R2) RADseq reads from _Quercus boyntonii_. You should always try to look at the data, even if you process the bulk of it with a program. Take a look at one of these files using `cat`. 
 
 ```{bash}
 cat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz
@@ -192,13 +187,13 @@ This long version of the directory gives us quite a bit of information!
 - Column 2 tells us about how many links are to this file.
 - Column 3 tells us about who is the owner of the file/directory.
 - Column 4 tells us about who is the group owner of the file/directory.
-- Column 5 tells us about the size of the file/directory in bytes unit (with the `-h` flag makes it in Byte, Kilobyte, Megabyte, Gigabyte, Terabyte and Petabyte)
+- Column 5 tells us about the size of the file/directory in bytes unit (the `-h` flag makes it human-readable: bytes, kilobytes, megabytes, etc.)
 - Column 6 provides the abbreviated month, day-of-month file was last modified, hour file last modified, minute file last modified. 
 - Column 7 is the file or directory path name. 
    
 **Exercise 1: What is the relative size difference between our compressed and uncompressed sequence files?**
 <details>	
-	By using the `ls-lht` command above, we can see that our compressed files are approximately 1/4 the size of our uncompressed files. Think of how much space that saves over the duration of a sequencing experiment! 
+	By using the `ls -lht` command above, we can see that our compressed files are approximately 1/4 the size of our uncompressed files. Think of how much space that saves over the duration of a sequencing experiment! 
 	</details>
 
 ## Modifying permissions and backing up your raw data 
@@ -229,9 +224,9 @@ And, we can prove to ourselves that we have modified the permissions by trying t
 rm ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz
 ```
 
-The output should ask if you actually want to remove the write-protected files. You should answer with an 'n'. If you say yes, you will remove the file forever! Using the command `rmdir` will delete directories. 
+The output should ask if you actually want to remove the write-protected files. You should answer with an 'n'. If you say yes, you will remove the file forever! Using the command `rm -r` will delete folders. 
 
-Moving forward, as you create files and directories, remember: 
+As you create files and folders in Linux, remember: 
 * File names that start with a period are hidden. You can view them with **ls -a**
 * Bash is case-sensitive. file1.txt and File1.txt are different. Be consistent. 
 * Do not (!!) embed spaces in file names. Use file1 or File_1 or file-1 or SnakeCase. I prefer underscores because R interprets - as subtraction.  
@@ -248,7 +243,7 @@ mkdir raw_fastq
 mv *.fastq raw_fastq
 ```
 
-Let's look at the first few lines of one of our fastq files with the command `head`. 
+You can look at the first few lines of one of our fastq files with the command `head`. 
 
 ```{bash}
 head raw_fastq/QUBO_S152_R1.fastq
@@ -260,14 +255,14 @@ You can do the same with `tail` for the end of the file. Both commands have an o
 tail -n 4 raw_fastq/QUBO_S152_R1.fastq
 ```
 
-It's useful to know about the fastqc file encoding: https://en.wikipedia.org/wiki/FASTQ_format. Fastqc uses these data to generate a really useful report. 
+You can read more about the fastq file encoding [here](https://en.wikipedia.org/wiki/FASTQ_format). Fastqc uses these data to generate a really useful report. 
 
 Let's check how many reads we have in each file using `wc` (word count). By default, using `wc` on a file gives three columns with the number of lines, the number of words, and the number of characters. We can ask for only the number of lines using the `-l` flag. 
 
 ```{bash}
 wc -l raw_fastq/QUBO_S152_R1.fastq
 ```
-**Exercise 3: How many reads are there?**
+**Exercise 2: How many reads are there?**
 <details>
 	There are 4 million lines in each file. Given that there are 4 lines per 1 sequence read in a .fastq file, there are 1 million reads in each file. 
 </details>
