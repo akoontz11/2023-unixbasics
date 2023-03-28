@@ -163,7 +163,15 @@ These commands will download a set of forward (R1) and reverse (R2) RADseq reads
 cat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz
 ```
 
-AH! Too much data and it looks garbled, too. Hit **Ctl+c (^c)** to quit a running process or abort a task. I use this more often than I care to admit. You can see that the file is of type "fastq.gz" where the ".gz" indicates the file has been compressed. File compression can save huge amounts of space! For today, though, let's uncompress the files. We can also use the `clear` command to clear the current screen.  
+AH! Too much data and it looks garbled. Hit **Ctl+c (^c)** to quit a running process or abort a task. I use this more often than I care to admit. You can see that the file is of type "fastq.gz" where the ".gz" indicates the file has been compressed. File compression can save huge amounts of space! 
+
+If you want to observe this compressed data in a more manageable way, we can use the command `zcat` (which allows us to look at "zipped" data) and then "pipe"" the output of that to the `less` command using the '|' ***operator***.
+
+```{bash}
+zcat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz | less
+```
+
+Let's decompress the files uzing `gunzip`.
 
 ```{bash}
 clear
@@ -171,7 +179,7 @@ gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz > QUBO_S152_R1.fastq
 gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz > QUBO_S152_R2.fastq
 ```
 
-The '>' is an ***operator*** , which redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. Other operators are the '>>' and '|' characters.
+The '>' is another ***operator*** , which redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. The '|' operator passes the output of a command to a different command; the '>' and '>>' operators passes the output of a command to a text file.
 
 Let's use our familiar `ls` command with some additional options, to see the difference in file size between compressed and uncompressed files. Again, the 'l' stands for 'long' format, which means more detailed information is provided for each file. The 'h' means 'human-readable' file sizes, and 't' sorts by date modified. Don't forget you can always use `man ls` to see all the detailed options. 
 
@@ -264,7 +272,7 @@ wc -l raw_fastq/QUBO_S152_R1.fastq
 ```
 **Exercise 2: How many reads are there?**
 <details>
-	There are 4 million lines in each file. Given that there are 4 lines per 1 sequence read in a .fastq file, there are 1 million reads in each file. 
+	There are 30 million lines in each file. Given that there are 4 lines per 1 sequence read in a .fastq file, there are ~7.6 million reads in each file. 
 </details>
 					
 Given how large these files are, it is not useful to use `cat` to try to look at them. We can view parts of the file using `more` or `less`. Like the manual pages, we can use the space bar to scroll, and the 'q' to quit. Can you tell what the difference is between the two commands? 
