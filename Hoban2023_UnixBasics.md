@@ -19,7 +19,7 @@ In this exercise, we'll be working in the **command line interface (CLI)**  for 
 
 So what is the command line? Essentially, a "command" is a string of text that, through the use of a command-line interpreter, tells the computer what to do. The command line connects the user to a computer operating system, which can be on your own physical computer, or which can be on a remote server many miles away. The **Unix shell** is one such command-line interpreter and is usually run within a Terminal window.  
 
-### Motivation
+## Motivation
 Almost everyone who's used to normally working in a GUI finds the use of command line extremely burdensome. So, why should we go through this Linux exercise? 
 
 - 1. *Necessity*: many widely used programs (e.g. for population genetics, [ipyrad](https://ipyrad.readthedocs.io/en/master/3-installation.html), [Stacks](https://catchenlab.life.illinois.edu/stacks/)) can only be run in a Linux (or Unix) environment. Learning the steps here allows you to install and run these programs.
@@ -27,9 +27,9 @@ Almost everyone who's used to normally working in a GUI finds the use of command
 - 3. *Reproducibility*: Unlike a GUI, working in a CLI allows for complete reproducibility. The commands used to install and run a program can be used across users to achieve identical results.
 
 ## Log on to the Hoban Lab server 
-Sign in to http://10.129.0.151:8787/auth-sign-in?appUri=%2F, using the username and password Austin has given to you. After providing your information, you'll be taken a screen that matches what you would see if you were to open RStudio on your personal desktop. This is RStudio-Server: you're running RStudio on the lab's Linux Server. 
+Sign in to [Hoban Lab server](http://10.129.0.151:8787/auth-sign-in?appUri=%2F), using the username and password Austin has given to you. After providing your information, you'll be taken a screen that matches what you would see if you were to open RStudio on your personal desktop. This is RStudio-Server: you're running RStudio on the lab's Linux Server. 
 
-Check out the source panel for scripting, the conosole/terminal, environment and history pane, and the files, viewer, packages, and help pane. You can customize this if you like.  
+Check out the source panel for scripting, the console/terminal, environment and history pane, and the files, viewer, packages, and help pane. You can customize this if you like.  
 
 <img width="1673" alt="Screen Shot 2021-08-29 at 11 44 30 AM" src="https://user-images.githubusercontent.com/10552484/131260953-acb91b54-1d3b-4041-b534-9925a8ee9166.png">
 
@@ -49,7 +49,7 @@ Returns for me:
 ```{bash}
 /home/akoontz
 ```
-The forwardslash (/) at the beginning indicates the ***root*** directory. That's the top-level of the server and everything lives below that. This is the first ***path*** we'll see. This is an ***absolute path*** which is like a complete address, in this case starting from the root. A ***relative path*** starts from your current directory. An absolute path is similar to having the GPS coordinates for a destination, whereas a relative path is similar to getting directions to a destination based on where you currently are. I often start troubleshooting bioinformatic issues by checking paths. 
+The forward slash (/) at the beginning indicates the ***root*** directory. That's the top-level of the server and everything lives below that. This is the first ***path*** we'll see. This is an ***absolute path*** which is like a complete address, in this case starting from the root. A ***relative path*** starts from your current directory. An absolute path is similar to having the GPS coordinates for a destination, whereas a relative path is similar to getting directions to a destination based on where you currently are. I often start troubleshooting bioinformatic issues by checking paths. 
 
 What else is in your home directory? Use `ls` to list the contents of your home directory. 
 
@@ -148,7 +148,7 @@ If you execute `cd` without any arguments, it will take you back home.
 cd
 ```
 
-## Let's start by downloading a practice data set. 
+### Let's start by downloading a practice data set. 
 
 Your first sequencing run is done and you've received an email from the sequencing facility that your data are ready. Now what? Depending on the facility, you may use `ftp`, `wget`, or `curl` to download the data. Today, we'll use `wget` (World Wide Web get). The `-O` argument specifies the filename to save the file to.
 
@@ -165,13 +165,14 @@ cat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz
 
 AH! Too much data and it looks garbled. Hit **Ctl+c (^c)** to quit a running process or abort a task. I use this more often than I care to admit. You can see that the file is of type "fastq.gz" where the ".gz" indicates the file has been compressed. File compression can save huge amounts of space! 
 
-If you want to observe this compressed data in a more manageable way, we can use the command `zcat` (which allows us to look at "zipped" data) and then "pipe"" the output of that to the `less` command using the '|' ***operator***.
+If you want to observe this compressed data in a more manageable way, we can use the command `zcat` (which allows us to look at "zipped" data) and then "pipe"" the output of that to the `less` command using the '|' ***operator***. 
 
 ```{bash}
 zcat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz | less
 ```
+Like the manual pages, we can use the space bar to scroll, and the 'q' to quit. 
 
-Let's decompress the files uzing `gunzip`.
+Let's decompress the files using `gunzip`.
 
 ```{bash}
 clear
@@ -237,7 +238,7 @@ The output should ask if you actually want to remove the write-protected files. 
 As you create files and folders in Linux, remember: 
 * File names that start with a period are hidden. You can view them with **ls -a**
 * Bash is case-sensitive. file1.txt and File1.txt are different. Be consistent. 
-* Do not (!!) embed spaces in file names. Use file1 or File_1 or file-1 or SnakeCase. I prefer underscores because R interprets - as subtraction.  
+* Avoid spaces in file names. Use file1 or File_1 or file-1 or snakeCase. I prefer underscores because R interprets - as subtraction.  
 
 ### Processing
 Before we submit jobs, we might want to know the status of our system, and what processes are running, so that we can decide how many jobs we can submit simultaneously. We can see what is currently running on a computer using either `htop`, which you can read more about [here](https://htop.dev/).
@@ -275,7 +276,7 @@ wc -l raw_fastq/QUBO_S152_R1.fastq
 	There are 30 million lines in each file. Given that there are 4 lines per 1 sequence read in a .fastq file, there are ~7.6 million reads in each file. 
 </details>
 					
-Given how large these files are, it is not useful to use `cat` to try to look at them. We can view parts of the file using `more` or `less`. Like the manual pages, we can use the space bar to scroll, and the 'q' to quit. Can you tell what the difference is between the two commands? 
+Given how large these files are, it is not useful to use `cat` to try to look at them. We can view parts of the file using `more` or `less`. Can you tell what the difference is between the two commands? 
 		
 ```{bash}
 more raw_fastq/QUBO_S152_R1.fastq
@@ -297,7 +298,7 @@ Make a directory to capture the output of fastqc.
 mkdir quality_metrics
 ```
 
-Use the wildcard \*.fastq to call both R1 and R2.  
+Use the wildcard \*.fastq to list both R1 and R2.  
 
 ```{bash}
 ls raw_fastq/*.fastq
@@ -322,7 +323,7 @@ http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.htm
 
 More on common fastqc red-flags: https://www.dna-ghost.com/single-post/2017/09/01/How-to-interpret-FASTQC-results 
 
-**Exercise 4: What did fastqc create?**
+**Exercise 3: What did fastqc create?**
 
 ls -l shows two new files for each fastq file
 
@@ -332,16 +333,19 @@ ls -l quality_metrics/
 
 ```{bash}
 total 1796
--rw-r--r-- 1 user10 user10 592881 Aug 23 10:51 QUBO_S152_R1_fastqc.html
--rw-r--r-- 1 user10 user10 311361 Aug 23 10:51 QUBO_S152_R1_sub_fastqc.zip
--rw-r--r-- 1 user10 user10 603773 Aug 23 10:51 QUBO_S152_R2_sub_fastqc.html
--rw-r--r-- 1 user10 user10 323468 Aug 23 10:51 QUBO_S152_R2_sub_fastqc.zip
+-rw-r--r-- 1 akoontz11 akoontz11 592881 Aug 23 10:51 QUBO_S152_R1_fastqc.html
+-rw-r--r-- 1 akoontz11 akoontz11 311361 Aug 23 10:51 QUBO_S152_R1_sub_fastqc.zip
+-rw-r--r-- 1 akoontz11 akoontz11 603773 Aug 23 10:51 QUBO_S152_R2_sub_fastqc.html
+-rw-r--r-- 1 akoontz11 akoontz11 323468 Aug 23 10:51 QUBO_S152_R2_sub_fastqc.zip
 ```
 	
 - The ".html" is the FastQC report, in HTML format.
 - The "zip" is a zipped (compressed) directory of FastQC output files.
 
 Let's look at the output. We can't view html reports on the remote server, so you could copy the file back to your own laptop. Within RStudio, however, we are able to open the html files we have generated by selecting the "Files" tab in the bottom right corner of RStudio, then navigating to our 'quality_metrics' directory. Open the html report in your web browser. How do you think the sequencing run went? 
+
+# R Exercise
+As biologists, many of us use R for analyses. 
 
 Hopefully today's lesson has helped you feel more comfortable working from the command line in UNIX. The more you practice, the easier and more fluid it will be!
 
