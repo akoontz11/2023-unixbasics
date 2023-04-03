@@ -1,11 +1,11 @@
 # Hoban Lab Skills Exchange: Intro to Command Lines in Linux
-### Friday, April 7th, 2023
+#### Friday, April 7th, 2023
 
 This session provides a broad overview of the command line interface, with a focus on performing basic commands in Linux. It's dervied from [an exercise](https://github.com/renaschweizer/congen-2021-unixbasics) given by Dr. Rena Schweizer at the 2021 ConGen conference, and is also based on publicly available workshops from www.datacarpentry.org. If you already know how to do all of the actions listed below under "Goals", then feel free to skip this part of the training. If this is all new to you--welcome!
 
 ## Goals
 By the end of this session, you should be familiar with the following: 
-- Command lines, how to implement them, and why they're useful
+- Command lines, why they're useful, and how to implement them
 - Navigating different directories on your system (`pwd`, `cd`, `ls`)
 - Assessing and changing file permissions (`ls -l`, `chmod`)
 - Moving/downloading data (`wget`, `curl`, `scp`)
@@ -26,7 +26,7 @@ Almost everyone who's used to normally working in a GUI finds the use of command
 - 2. *Supportability*: Linux is cool because, unlike Mac OS or Windows, it's entirely open-source. If you have an issue on your Mac/Windows computer, you have to contact IT or the support team for Apple/Microsoft. If you have an issue on a Linux OS, you do the same thing that you do when you encounter an error in R or Python: copy it, Google it, look at the relevant post on Stack Overflow, and make the fix yourself. Linux is supportable because it's open-source. 
 - 3. *Reproducibility*: Unlike a GUI, working in a CLI allows for complete reproducibility. The commands used to install and run a program can be used across users to achieve identical results.
 
-## Log on to the Hoban Lab server 
+## Getting started: Log onto the Hoban Lab server 
 Sign in to [Hoban Lab server](http://10.129.0.151:8787/auth-sign-in?appUri=%2F), using the username and password Austin has given to you. After providing your information, you'll be taken a screen that matches what you would see if you were to open RStudio on your personal desktop. This is RStudio-Server: you're running RStudio on the lab's Linux Server. 
 
 Check out the source panel for scripting, the console/terminal, environment and history pane, and the files, viewer, packages, and help pane. You can customize this if you like.  
@@ -35,7 +35,7 @@ Check out the source panel for scripting, the console/terminal, environment and 
 
 
 ## Natigation: Here we go! 
-Let's orient ourselves to this environment.  Click the terminal tab in the console/terminal/jobs pane, in the lower left for default configuration. 
+Let's orient ourselves to this environment.  Click the terminal tab in the console/terminal/jobs pane, in the lower left for the default configuration. 
 
 The command prompt begins with your username @ ip-adress and a colon (:), then a tilde (~) for your home ***directory*** and a $ indicating the beginning of a shell prompt. A **directory** is like a folder in your files finder. If you think about your Home folder on your own computer, you likely have several folders, many that contain subfolders or files. 
 
@@ -67,8 +67,9 @@ RStudio has nice color encoding to help us identify different types of contents.
 
 Let's list one of those directories using the `ls` command and an ***argument***, `demoFolder`. This is the basic format of shell programming, like many other languages. 
 
-### A few tips as we get going here: 
-If you start typing "ins", and hit ***\<TAB>*** the computer will auto-complete for instructor_materials. If there are multiple matches, it will only auto-complete as far as the matching part. If you hit ***\<TAB> \<TAB>***, it will list the possible matches.  USE TAB-COMPLETE!! This will reduce mistakes and make you more efficient. 
+
+#### Tips 
+If you start typing "dem", and hit ***\<TAB>*** the computer will auto-complete for "demoFolder". If there are multiple matches, it will only auto-complete as far as the matching part. If you hit ***\<TAB> \<TAB>***, it will list the possible matches.  USE TAB-COMPLETE! This will reduce mistakes and make you more efficient. 
 
 You can scroll-up in your command history with the up- and down-arrow keys. 
 
@@ -78,7 +79,7 @@ ls demoFolder
 
 Returns: 
 ```{bash}
-demo_file.txt   DNA_16pops_migLow_1.arb   DNA_16pops_migLow_1.simparam    draft_fscParams_lowMutation.sh   
+Rscript_QCkitFastQ.R  demo_file.txt  DNA_16pops_migLow_1.arb  DNA_16pops_migLow_1.simparam draft_fscParams_lowMutation.sh
 ```
 
 Arguments often have **flags** to modify the execution of a command. Single dash ***-*** have single-character options. Double-dash ***--*** have multi-character. Which flags can you use to modify the `ls` command? How do you find out? 
@@ -101,7 +102,7 @@ Let's sort the demoFolder by the most recently modified with the `-t` flag. For 
 ls demoFolder -t
 ```
 
-What do the -h and -l flags provide? Note they can be strung together here with the single dash. 
+What do the -h and -l flags provide? Note that flags can be strung together here with the single dash. 
 
 ```{bash}
 ls demoFolder/ -lth
@@ -142,13 +143,13 @@ You can also chain them together with a wildcard:
 ls ../R*
 ```
 
-If you execute `cd` without any arguments, it will take you back home.
+If you execute `cd` without any arguments, it will take you back to your home directory.
 
 ```{bash}
 cd
 ```
 
-### Let's start by downloading a practice data set. 
+## Downloading a practice data set
 
 Your first sequencing run is done and you've received an email from the sequencing facility that your data are ready. Now what? Depending on the facility, you may use `ftp`, `wget`, or `curl` to download the data. Today, we'll use `wget` (World Wide Web get). The `-O` argument specifies the filename to save the file to.
 
@@ -157,20 +158,22 @@ wget https://www.dropbox.com/s/y44fa4zjboiq8ko/ATGCCGCT-CTCCTTAC_S152_L002_R1_00
 wget https://www.dropbox.com/s/tthl4xdt7in5k7z/ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz?dl=0 -O ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz
 ```
 
-These commands will download a set of forward (R1) and reverse (R2) RADseq reads from _Quercus boyntonii_. You should always try to look at the data, even if you process the bulk of it with a program. Take a look at one of these files using `cat`. 
+These commands will download a set of forward (R1) and reverse (R2) RADseq reads from _Quercus boyntonii_. These are the product of Illumina "paired end" sequencing, and the files are named according to the adapters used during Illumina bridge amplification (which makes for the awfully long file name!)
+
+Let's take a look at one of these files using `cat`. 
 
 ```{bash}
 cat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz
 ```
 
-AH! Too much data and it looks garbled. Hit **Ctl+c (^c)** to quit a running process or abort a task. I use this more often than I care to admit. You can see that the file is of type "fastq.gz" where the ".gz" indicates the file has been compressed. File compression can save huge amounts of space! 
+AH! Too much data and it looks garbled. Hit **Ctl+c (^c)** to quit a running process or abort a task. This is one of the most important commands you'll learn today! We can see that the file is of type "fastq.gz": the ".gz" indicates the file has been compressed. File compression can save huge amounts of space! 
 
 If you want to observe this compressed data in a more manageable way, we can use the command `zcat` (which allows us to look at "zipped" data) and then "pipe"" the output of that to the `less` command using the '|' ***operator***. 
 
 ```{bash}
 zcat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz | less
 ```
-Like the manual pages, we can use the space bar to scroll, and the 'q' to quit. 
+Like the manual pages, we can use the space bar to scroll the output of `less`, and 'q' to quit. In this file 
 
 Let's decompress the files using `gunzip`.
 
@@ -182,41 +185,36 @@ gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz > QUBO_S152_R2.fastq
 
 The '>' is another ***operator*** , which redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. The '|' operator passes the output of a command to a different command; the '>' and '>>' operators passes the output of a command to a text file.
 
-Let's use our familiar `ls` command with some additional options, to see the difference in file size between compressed and uncompressed files. Again, the 'l' stands for 'long' format, which means more detailed information is provided for each file. The 'h' means 'human-readable' file sizes, and 't' sorts by date modified. Don't forget you can always use `man ls` to see all the detailed options. 
+Let's use our familiar `ls` command with some additional options, to see the difference in file size between compressed and uncompressed files. Again, the 'l' stands for 'long' format, which means more detailed information is provided for each file. The 'h' means 'human-readable' file sizes, and 't' sorts by date modified. Don't forget you can always use `man ls` to see all the detailed options.
 
 ```{bash}
 ls -lht
 ```
-This is what I see on my Terminal window (don't worry if you don't have all the same directories that I have): 
+
+This is what I see on my Terminal window (don't worry if you don't have all the same directories that I have):
 
 <img width="561" alt="Screen Shot 2021-08-29 at 2 59 50 PM" src="https://user-images.githubusercontent.com/10552484/131265204-5d18cd33-4b6f-4a1f-a196-392ed3866c24.png">
 
-This long version of the directory gives us quite a bit of information! 
+An explanation of all this output is below, but don't worry too much about each field
+
 - Column 1 provides information if the content is a directory ('d'), file ('-'), or a link ('l'). The next 9 characters provide information on the file permission, with 3 characters for the Owner, the next 3 for the Group owner, and the last 3 for everyone else. Each set of 3 characters provides information on whether members of that group can read it ('r'), write to it ('w'), or execute it ('x'). 
 - Column 2 tells us about how many links are to this file.
 - Column 3 tells us about who is the owner of the file/directory.
 - Column 4 tells us about who is the group owner of the file/directory.
 - Column 5 tells us about the size of the file/directory in bytes unit (the `-h` flag makes it human-readable: bytes, kilobytes, megabytes, etc.)
 - Column 6 provides the abbreviated month, day-of-month file was last modified, hour file last modified, minute file last modified. 
-- Column 7 is the file or directory path name. 
-   
-**Exercise 1: What is the relative size difference between our compressed and uncompressed sequence files?**
-<details>	
-	By using the `ls -lht` command above, we can see that our compressed files are approximately 1/4 the size of our uncompressed files. Think of how much space that saves over the duration of a sequencing experiment! 
-	</details>
+- Column 7 is the file or directory path name.
 
-## Modifying permissions and backing up your raw data 
+## Modifying permissions and backing up raw data 
 
 One of the first things I do when I get new data is I make a backup of it that is write protected. Let's do that now using the `mv` command. Depending on how it is used, `mv` can either rename a file or move a file to somewhere else.  
 ```{bash}
-mkdir data_backup
-mv ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz data_backup
-cd data_backup
+mkdir dataBackup
+mv ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz dataBackup
+cd dataBackup
 ls -l
 ```
-These commands make a copy of the data in a new directory called "data_backup", then list the permissions for the files. What are the current permissions for the owner of the file? 
-
-We can then modify the permissions of files using the command `chmod` and flags to add or remove read, write, or execute ability. Our goal for now is to change permissions on this file so that you (the owner) no longer have write permissions. We can do this using the `chmod` (change mode) command and subtracting (-) the write permission -w.
+These commands make a copy of the data in a new directory called "dataBackup", then list the permissions for the files. We can then modify the permissions of files using the command `chmod` and flags to add or remove read, write, or execute ability. Our goal for now is to change permissions on this file so that you (the owner) no longer have write permissions. We can do this using the `chmod` (change mode) command and subtracting (-) the write permission -w.
 
 ```{bash}
 chmod -w ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz
@@ -235,13 +233,11 @@ rm ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz
 
 The output should ask if you actually want to remove the write-protected files. You should answer with an 'n'. If you say yes, you will remove the file forever! Using the command `rm -r` will delete folders. 
 
+#### Tips
 As you create files and folders in Linux, remember: 
 * File names that start with a period are hidden. You can view them with **ls -a**
 * Bash is case-sensitive. file1.txt and File1.txt are different. Be consistent. 
 * Avoid spaces in file names. Use file1 or File_1 or file-1 or snakeCase. I prefer underscores because R interprets - as subtraction.  
-
-### Processing
-Before we submit jobs, we might want to know the status of our system, and what processes are running, so that we can decide how many jobs we can submit simultaneously. We can see what is currently running on a computer using either `htop`, which you can read more about [here](https://htop.dev/).
 
 ## Viewing files
 
@@ -275,16 +271,9 @@ wc -l raw_fastq/QUBO_S152_R1.fastq
 <details>
 	There are 30 million lines in each file. Given that there are 4 lines per 1 sequence read in a .fastq file, there are ~7.6 million reads in each file. 
 </details>
-					
-Given how large these files are, it is not useful to use `cat` to try to look at them. We can view parts of the file using `more` or `less`. Can you tell what the difference is between the two commands? 
-		
-```{bash}
-more raw_fastq/QUBO_S152_R1.fastq
-less raw_fastq/QUBO_S152_R1.fastq		
-```
 
-# Fastqc
-I almost always run Fastqc first when I get a new data set. I check for the expected number of reads, read length, overall quality, and duplicate rate. 
+## Running fastqc
+We're going to run fastqc, a lightweight software that allows you to check the expected number of reads, read length, overall quality, and duplicate rate in a collection of next generation sequencing (NGS) data.
 
 Check out fastqc options with the --help option.
 
@@ -310,18 +299,13 @@ raw_fastq/QUBO_S152_R1.fastq
 raw_fastq/QUBO_S152_R2.fastq
 ```
 
-## Run FastQC
+Now, let's run fastqc.
 
 ```{bash}
 fastqc raw_fastq/*.fastq -o quality_metrics/
 ```
 
-While this is running, look through the provided 'good' and 'bad' report examples. 
-
-http://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html
-http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html
-
-More on common fastqc red-flags: https://www.dna-ghost.com/single-post/2017/09/01/How-to-interpret-FASTQC-results 
+While this is running, look through the  [good](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) and [bad](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html) report examples, and [common fast-qc red flags](https://www.dna-ghost.com/single-post/2017/09/01/How-to-interpret-FASTQC-results). 
 
 **Exercise 3: What did fastqc create?**
 
@@ -344,9 +328,48 @@ total 1796
 
 Let's look at the output. We can't view html reports on the remote server, so you could copy the file back to your own laptop. Within RStudio, however, we are able to open the html files we have generated by selecting the "Files" tab in the bottom right corner of RStudio, then navigating to our 'quality_metrics' directory. Open the html report in your web browser. How do you think the sequencing run went? 
 
-# R Exercise
-As biologists, many of us use R for analyses. 
+## Running R
+As biologists, many of us use R for analyses. I've often found myself in the scenario where I'm writing one R script while waiting for another to finish, and I briefly want to demonstrate a few ways to improve that experience in Linux.
 
+### Checking out an R script
+Let's move out of Terminal really quick. In the "File" tab of RStudio server, open the R script in the demoFolder directory ("Rscript_QCkistFastQ.R"), and run the entire script by pressing **Ctl+Alt+e**. What outputs do you get?
+
+### Running a process in the background
+While running the script above, you may have noticed that it took a little while for the below lines to run:
+
+```{r}
+R1_seq <- seqTools::fastqq(R1_infile)
+R2_seq <- seqTools::fastqq(R2_infile)
+```
+
+There are two ways we can optimize this, outlined below.
+
+#### RStudio background jobs
+The first approach is to use the "Background jobs" tab in RStudio. This allows you to specify a script, and have that script run in the background while the main window of RStudio can still be used. You're also given the option of copying the output from that script into the current global environment.
+
+#### BASH nohup command
+The second approach allows you to fire off a process in the "background" of terminal. Normally, if you wanted to run an R script from Terminal, you would use a command like:
+
+```{bash}
+Rscript demo_QCkitFastQ.R
+```
+
+If you want to run this (or any BASH) command in the background, you preface it with the command `nohup`, which stands for "no hangups". Importantly, you end the command string with the `&` symbol. This gives you the string below:
+
+```{bash}
+nohup Rscript demo_QCkitFastQ.R &
+```
+
+When you run this command, you won't see anything printed to the standard output. You will see a new file in your current working directory called "nohup.text". If you look at the contents of this file using `less nohup.text`, you'll see that it's what would typically be printed to the "Console" tab of your RStudio window. 
+
+The script is running in the background on the Linux server. If you want to check other processes occurring on the server, use the `htop` command:
+
+```{bash}
+htop
+```
+
+This shows you a display of all the servers processors (32 cores), as well as the applications currently running. You can exit the `htop` window by pressing **q**.
+## Conclusion
 Hopefully today's lesson has helped you feel more comfortable working from the command line in UNIX. The more you practice, the easier and more fluid it will be!
 
 # Other resources
