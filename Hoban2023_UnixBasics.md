@@ -9,8 +9,8 @@ By the end of this session, you should be familiar with the following:
 - Navigating different directories on your system (`pwd`, `cd`, `ls`)
 - Assessing and changing file permissions (`ls -l`, `chmod`)
 - Moving/downloading data (`wget`, `curl`, `scp`)
-- assessing available disk space and usage (`df`, `du`, `top`, `htop`)
-- viewing, copying, moving files (`head`, `tail`, `more`, `less`, `cat`, `rm`, `mv`, `mkdir`)
+- Viewing, copying, moving files (`head`, `tail`, `more`, `less`, `cat`, `rm`, `mv`, `mkdir`)
+- Running R scripts from the command line.
 
 We'll download raw sequence data, make backups, and analyze the quality of the data. 
 
