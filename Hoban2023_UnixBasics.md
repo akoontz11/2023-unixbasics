@@ -20,14 +20,14 @@ In this exercise, we'll be working in the **command line interface (CLI)**  for 
 So what is the command line? Essentially, a "command" is a string of text that, through the use of a command-line interpreter, tells the computer what to do. The command line connects the user to a computer operating system, which can be on your own physical computer, or which can be on a remote server many miles away. The **Unix shell** is one such command-line interpreter and is usually run within a Terminal window.  
 
 ## Motivation
-Almost everyone who's used to normally working in a GUI finds the use of command line extremely burdensome. So, why should we go through this Linux exercise? 
+Almost everyone who's used to normally working in a GUI finds the use of command line burdensome. So, why should we go through this Linux exercise? 
 
 - 1. *Necessity*: many widely used programs (e.g. for population genetics, [ipyrad](https://ipyrad.readthedocs.io/en/master/3-installation.html), [Stacks](https://catchenlab.life.illinois.edu/stacks/)) can only be run in a Linux (or Unix) environment. Learning the steps here allows you to install and run these programs.
 - 2. *Supportability*: Linux is cool because, unlike Mac OS or Windows, it's entirely open-source. If you have an issue on your Mac/Windows computer, you have to contact IT or the support team for Apple/Microsoft. If you have an issue on a Linux OS, you do the same thing that you do when you encounter an error in R or Python: copy it, Google it, look at the relevant post on Stack Overflow, and make the fix yourself. Linux is supportable because it's open-source. 
 - 3. *Reproducibility*: Unlike a GUI, working in a CLI allows for complete reproducibility. The commands used to install and run a program can be used across users to achieve identical results.
 
 ## Getting started: Log onto the Hoban Lab server 
-Sign in to [Hoban Lab server](http://10.129.0.151:8787/auth-sign-in?appUri=%2F), using the username and password Austin has given to you. After providing your information, you'll be taken a screen that matches what you would see if you were to open RStudio on your personal desktop. This is RStudio-Server: you're running RStudio on the lab's Linux Server. 
+Sign in to the [Hoban Lab server](http://10.129.0.151:8787/auth-sign-in?appUri=%2F), using the username and password Austin has given to you. After providing your information, you'll be taken a screen that matches what you would see if you were to open RStudio on your personal desktop. This is RStudio-Server: you're running RStudio on the lab's Linux Server. 
 
 Check out the source panel for scripting, the console/terminal, environment and history pane, and the files, viewer, packages, and help pane. You can customize this if you like.  
 
