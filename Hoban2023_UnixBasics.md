@@ -27,15 +27,15 @@ Almost everyone who's used to normally working in a GUI finds the use of a CLI b
 3. *Reproducibility*: Unlike a GUI, working in a CLI allows for complete reproducibility. The commands used to install and run a program on one computer can be used across systems to achieve identical results.
 
 ## Getting started: Log onto the Hoban Lab server 
-Sign in to the [Hoban Lab server](http://10.129.0.151:8787/auth-sign-in?appUri=%2F), using the username and password Austin has given to you. After providing your information, you'll be taken a screen that matches what you would see if you were to open RStudio on your personal desktop. This is RStudio-Server: you're running RStudio on the lab's Linux Server. 
+Sign in to the [Hoban Lab server](http://10.129.0.151:8787/auth-sign-in?appUri=%2F), using the username and password Austin has given to you. After providing your information, you'll be taken a screen that matches what you would see if you were to open RStudio on your personal desktop. This is RStudio-Server: you're running RStudio on the lab's Linux server. 
 
-Check out the source panel for scripting, the console/terminal, environment and history pane, and the files, viewer, packages, and help pane. You can customize this if you like.  
+Check out the source panel for scripting, the Console/Terminal, environment and history pane, and the files, viewer, packages, and help pane. You can customize this if you like.  
 
 <img width="1673" alt="Screen Shot 2021-08-29 at 11 44 30 AM" src="https://user-images.githubusercontent.com/10552484/131260953-acb91b54-1d3b-4041-b534-9925a8ee9166.png">
 
 
 ## Natigation: Here we go! 
-Let's orient ourselves to this environment.  Click the Terminal tab in the Console/Terminal/Render/Background Jobs pane, in the lower left for the default configuration. Feel free to expand the window.
+Let's orient ourselves.  Click the Terminal tab in the Console/Terminal/Render/Background Jobs pane, in the lower left for the default configuration. Feel free to expand the window.
 
 The command prompt begins with your username @ ip-adress and a colon (:), then a tilde (~) for your home ***directory*** and a `$` indicating the beginning of a shell prompt. Print your working directory with `pwd`, our first command. This command returns where you are in the structure of the server.
 
@@ -66,9 +66,11 @@ RStudio color encodes light blue for directories, black for files, and red for e
 Let's list one of those directories using the `ls` command and an ***argument***, `demoFolder`. This is the basic format of shell programming, like many other languages. 
 
 ---
-**_Tip:typing in command line_**  
 
-If you start typing "dem", and hit ***\<TAB>*** the computer will auto-complete for "demoFolder". If there are multiple matches, it will only auto-complete as far as the matching part. If you hit ***\<TAB> \<TAB>***, it will list the possible matches.  USE TAB-COMPLETE! This will reduce mistakes and make you more efficient. You can also scroll-up in your command history by pressing the up- and down-arrow keys. 
+**_Tip: typing in command line_**  
+
+If you start typing "dem", and hit ***\<TAB>*** the computer will auto-complete for "demoFolder". If there are multiple matches, it will only auto-complete as far as the matching part. If you hit ***\<TAB> \<TAB>***, it will list the possible matches.  **USE TAB-COMPLETE!** This will reduce mistakes and make you more efficient. You can also scroll-up in your command history by pressing the up- and down-arrow keys. 
+
 ---
 
 ```{bash}
