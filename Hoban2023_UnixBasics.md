@@ -65,8 +65,11 @@ RStudio color encodes light blue for directories, black for files, and red for e
 
 Let's list one of those directories using the `ls` command and an ***argument***, `demoFolder`. This is the basic format of shell programming, like many other languages. 
 
-#### _Tip:typing in command line_
+---
+**_Tip:typing in command line_**  
+
 If you start typing "dem", and hit ***\<TAB>*** the computer will auto-complete for "demoFolder". If there are multiple matches, it will only auto-complete as far as the matching part. If you hit ***\<TAB> \<TAB>***, it will list the possible matches.  USE TAB-COMPLETE! This will reduce mistakes and make you more efficient. You can also scroll-up in your command history by pressing the up- and down-arrow keys. 
+---
 
 ```{bash}
 ls demoFolder 
@@ -115,7 +118,8 @@ If you execute `cd` without any arguments, it will take you back to your home di
 cd
 ```
 ---
-**_Tip: special characters_**
+**_Tip: special characters_**  
+
 A few very useful special characters in Linux:  
 
 - ~ represents your home directory.  
@@ -149,41 +153,6 @@ You can also chain them together with a wildcard:
 ls ../R*
 ```
 ---
-
-#### _Tip: special characters_
-
-A few very useful special characters in Linux:  
-
-- ~ represents your home directory.  
-
-- . represents your current directory.  
-
-- .. represents the directory up one level.  
-
-- \* is a wildcard and represents one or more characters.  
-
-```{bash}
-ls .
-```
-
-```{bash}
-ls ..
-```
-
-You can chain these together:
-
-```{bash}
-ls ../..
-```
-
-```{bash}
-ls ~
-```
-
-You can also chain them together with a wildcard: 
-```{bash}
-ls ../R*
-```
 
 ## Downloading a practice data set
 
@@ -235,7 +204,7 @@ This is what I see on my Terminal window (don't worry if you don't have all the 
 ---
 **_Tip: `ls -l` output_**
 
-An explanation of all this output is below, but don't worry too much about each field
+An explanation of all this output is below--but don't worry too much about each field.
 
 - Column 1 provides information if the content is a directory ('d'), file ('-'), or a link ('l'). The next 9 characters provide information on the file permission, with 3 characters for the Owner, the next 3 for the Group owner, and the last 3 for everyone else. Each set of 3 characters provides information on whether members of that group can read it ('r'), write to it ('w'), or execute it ('x'). 
 - Column 2 tells us about how many links are to this file.
@@ -244,7 +213,6 @@ An explanation of all this output is below, but don't worry too much about each 
 - Column 5 tells us about the size of the file/directory in bytes unit (the `-h` flag makes it human-readable: bytes, kilobytes, megabytes, etc.)
 - Column 6 provides the abbreviated month, day-of-month file was last modified, hour file last modified, minute file last modified. 
 - Column 7 is the file or directory path name.
-
 ---
 
 ## Modifying permissions and backing up raw data 
