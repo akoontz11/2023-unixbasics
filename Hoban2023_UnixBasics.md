@@ -17,7 +17,7 @@ We'll download raw sequence data, make backups, and analyze the quality of the d
 ## Background and Terminology
 We'll be working in the **command line interface (CLI)**  for Linux. This is different from a **graphical user interface (GUI)**, which is used when you open a Windows or Mac computer. Instead of moving your mouse over an icon on your desktop and double-clicking it to run, we'll initiate programs using text delivered on the command line. 
 
-So what is the command line? Essentially, a **command** is a string of text that, through the use of a command-line interpreter (usually the program **Terminal**), tells the computer what to do. The command line connects the user to an operating system, on your own computer or a remote server. To communicate with the computer, we typically use a **shell**, called such because it wraps around the outside of the "core" part of a computer (termed the **kernel**). Specifically, today we'll be using a shell named "Bourne Again Shell"--or, more commonly, **BASH**.
+So what is the command line? Essentially, a **command** is a string of text that, through the use of a command-line interpreter (usually the program **Terminal**), tells the computer what to do. The command line connects the user to an operating system, on your own computer or a remote server. To communicate with the computer, we typically use a **shell**, called such because it wraps around the outside of the "core" part of a computer (termed the **kernel**). Specifically, we'll be using a shell named "Bourne Again Shell"--or, more commonly, **BASH**.
 
 ## Motivation
 Almost everyone who's used to working in a GUI finds the use of a CLI burdensome. So why should we put ourselves through this? 
