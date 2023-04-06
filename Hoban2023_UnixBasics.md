@@ -12,7 +12,7 @@ By the end of this session, you should be familiar with the following:
 * Viewing, copying, moving files (`head`, `tail`, `more`, `less`, `cat`, `rm`, `mv`, `mkdir`)
 * Running R scripts from the command line (`Rscript`, `nohup`)
 
-We'll download raw sequence data, make backups, and analyze the quality of the data. For the 3 ***Exercises*** below, try to come up with an answer on your own before revealing the solution (clicking the "Details" dropdown arrow).
+We'll download raw sequence data, make backups, and analyze the quality of the data. For the 3 ***Exercises*** below, try to come up with an answer on your own before revealing the solution (clicking the "Details" dropdown arrow). We'll pause at each exercise for folks to ask question or get help.
 
 ## Background and Terminology
 We'll be working in the **command line interface (CLI)**  for Linux. This is different from a **graphical user interface (GUI)**, which is used when you open a Windows or Mac computer. Instead of moving your mouse over an icon on your desktop and double-clicking it to run, we'll initiate programs using text delivered on the command line. 
