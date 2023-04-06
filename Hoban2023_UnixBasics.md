@@ -12,7 +12,7 @@ By the end of this session, you should be familiar with the following:
 * Viewing, copying, moving files (`head`, `tail`, `more`, `less`, `cat`, `rm`, `mv`, `mkdir`)
 * Running R scripts from the command line (`Rscript`, `nohup`)
 
-We'll download raw sequence data, make backups, and analyze the quality of the data. 
+We'll download raw sequence data, make backups, and analyze the quality of the data. For the ***Exercises*** below, try to come up with an answer on your own before revealing the solution (clicking the "Details" dropdown arrow).
 
 ## Background and Terminology
 In this exercise, we'll be working in the **command line interface (CLI)**  for Linux. This is different from a **graphical user interface (GUI)**, which is used when you open a Windows or Mac computer. Instead of moving your mouse over an icon on your desktop and double-clicking it to run, we'll initiate programs using text delivered on the command line. 
@@ -294,7 +294,7 @@ wc -l raw_fastq/QUBO_S152_R1.fastq
 </details>
 
 ## Running fastqc
-We're going to run fastqc, a lightweight software that allows you to check the expected number of reads, read length, overall quality, and duplicate rate in a collection of next generation sequencing (NGS) data.
+We're going to run [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), a lightweight software that allows you to check the expected number of reads, read length, overall quality, and duplicate rate in a collection of next generation sequencing (NGS) data.
 
 Check out fastqc options with the --help option.
 
@@ -330,7 +330,8 @@ While this is running, look through the  [good](http://www.bioinformatics.babrah
 
 **Exercise 3: What did fastqc create?**
 <details>
-`ls -l` shows two new files for each fastq file
+
+`ls -l` shows two new files for each .fastq file.
 
 ```{bash}
 ls -l quality_metrics/
@@ -349,16 +350,16 @@ total 1796
 
 </details>
 
-Let's look at the output. Within RStudio, we can open the html files by selecting the "Files" tab in the bottom right corner, then navigating to our 'quality_metrics' directory. Open the html report in your web browser. Some points:
-* _Per base sequence quality_: notice how quality values drop as the read (in this case, 151 bp long) increases. This is characteristic of Illumina's "sequencing by synthesis" (SBS) chemistry, and is a reason that paired end reads are handy.
-* _Adapter Content_: notice the presence of Nextera Transposase adapter sequence in these reads. Prior to analysis, we need to our data of these sequences!
-* Anything else stands out to you?
+Let's look at the output. Within RStudio, we can open the HTML files by selecting the "Files" tab in the bottom right corner, then navigating to our `quality_metrics` directory. Open the HTML report in your web browser. Some points:
+* _Per base sequence quality_: notice how quality values drop as the read (in this case, 151 bp long) increases. This is characteristic of Illumina's "sequencing by synthesis" (SBS) chemistry, and is the reason that paired end data is handy.
+* _Adapter Content_: notice the presence of Nextera Transposase adapter sequence in these reads. Prior to analysis, we need to trim our data of these sequences!
+* Anything else stand out to you?
 
 ## Running R
 As biologists, many of us use R for analyses. I want to briefly demonstrate a few ways an R script can be fired off in Linux and set to run in the background.
 
 ### Checking out an R script
-Let's move out of Terminal really quick. In the "File" tab of RStudio server, open the R script in the demoFolder directory ("demoFolder/Rscript_QCkistFastQ.R"), and run the entire script by pressing **Ctl+Alt+e**. What outputs do you get in the "Console" screen?
+Let's move out of Terminal really quick. In the "File" tab of RStudio server, open the R script in the `demoFolder` directory ("demoFolder/Rscript_QCkistFastQ.R"), and run the entire script by pressing **Ctl+Alt+e**. What outputs do you get in the "Console" screen?
 
 ### Running a process in the background
 While running the script above, you may have noticed that it took a little while for the below lines to run:
@@ -386,7 +387,7 @@ If you want to run this (or any BASH) command in the background, you preface it 
 nohup Rscript demo_QCkitFastQ.R &
 ```
 
-When you run this command, you won't see anything printed to the standard output. You'll see a new file in your current working directory called "nohup.text". If you look at the contents of this file (`less nohup.text`), you'll see that it's what would typically be printed to the "Console" tab of your RStudio window--the output.
+When you run this command, you won't see anything printed to the standard output. Instead, you'll see a new file in your current working directory called "nohup.text". If you look at the contents of this file (`less nohup.text`), you'll see that it's what would typically be printed to the "Console" tab of your RStudio window--the output.
 
 The script is running in the background on the Linux server. If you want to check other processes occurring on the server, use the `htop` command:
 
@@ -397,7 +398,7 @@ htop
 This shows you a display of all the servers processors (32 cores), as well as the applications currently running. You can exit the `htop` window by pressing **q**.  
 
 ## Conclusion
-Hopefully today's lesson has helped you feel more comfortable working from the command line in UNIX. The more you practice, the easier and more fluid it will be!
+Hopefully today's lesson has helped you feel more comfortable working from the command line in Linux. The more you practice, the easier and more fluid it will be!
 
 # Other resources
 
