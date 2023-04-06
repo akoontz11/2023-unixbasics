@@ -23,7 +23,7 @@ So what is the command line? Essentially, a **command** is a string of text that
 Almost everyone who's used to working in a GUI finds the use of a CLI burdensome. So why should we put ourselves through this? 
 
 1. *Necessity*: many widely used programs (e.g. for population genetics, [ipyrad](https://ipyrad.readthedocs.io/en/master/3-installation.html), [Stacks](https://catchenlab.life.illinois.edu/stacks/)) can only be run in a Linux (or Unix) environment. Learning the steps here allows you to install and run these programs.
-2. *Supportability*: Linux is cool because unlike Mac OS or Windows, it's entirely open-source. On your Mac/Windows OS, if you have an issue, you have to contact IT or the support team for Apple/Microsoft. If you have an issue on a Linux OS, you do the same thing you'd do when encountering an error in R or Python: Google it, look at the relevant post on Stack Overflow, and make the fix yourself. Linux is supportable because it's open-source. 
+2. *Supportability*: Linux is cool because unlike Mac OS or Windows, it's ***entirely*** open-source. On your Mac/Windows OS, if you have an issue, you have to contact IT or the support team for Apple/Microsoft. If you have an issue on a Linux OS, you do the same thing you'd do when encountering an error in R or Python: Google it, look at the relevant post on Stack Overflow, and make the fix yourself. Linux is supportable because it's open-source. 
 3. *Reproducibility*: Unlike a GUI, working in a CLI allows for complete reproducibility. The commands used to install and run a program on one computer can be used across systems to achieve identical results.
 
 ## Getting started: Log onto the Hoban Lab server 
