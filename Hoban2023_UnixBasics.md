@@ -302,13 +302,13 @@ Check out fastqc options with the --help option.
 fastqc --help
 ```
 
-Make a directory to capture the output of fastqc. 
+Exit the help screen by pressing **q**, then make a directory to capture the output of fastqc. 
 
 ```{bash}
 mkdir quality_metrics
 ```
 
-Use the wildcard \*.fastq to list both R1 and R2.  
+Use the wildcard `\*.fastq` to list both R1 and R2.  
 
 ```{bash}
 ls raw_fastq/*.fastq
