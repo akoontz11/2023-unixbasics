@@ -71,7 +71,7 @@ Let's list one of those directories using the `ls` command and an ***argument***
 
 If you start typing "dem", and hit ***\<TAB>*** the computer will auto-complete for "demoFolder". If there are multiple matches, it will only auto-complete as far as the matching part. If you hit ***\<TAB> \<TAB>***, it will list the possible matches.  **USE TAB-COMPLETE!** This will reduce mistakes and make you more efficient. You can also scroll-up in your command history by pressing the up- and down-arrow keys. 
 
-Also, some of the longer commands in this exercise you may wish to copy/paste. In order to paste into Terminal, use the keyboard shortcut ***<Ctrl> + <Shift> + V***.
+Also, some of the longer commands in this exercise you may wish to copy/paste. In order to paste into Terminal, use the keyboard shortcut ***Ctrl + Shift + V***.
 
 ---
 
