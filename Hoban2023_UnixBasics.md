@@ -104,7 +104,7 @@ Let's sort the demoFolder by the most recently modified files with the `-t` flag
 ls demoFolder -t
 ```
 
-What do the -h and -l flags provide? Note that flags can be strung together here with the single dash. 
+What do the `-h` and `-l` flags provide? Note that flags can be strung together with the single dash. 
 
 ```{bash}
 ls demoFolder/ -lth
@@ -126,13 +126,13 @@ cd
 
 A few very useful special characters in Linux:  
 
-- ~ represents your home directory.  
+- ~  represents your home directory.  
 
-- . represents your current directory.  
+- .   represents your current directory.  
 
 - .. represents the directory up one level.  
 
-- \* is a wildcard and represents one or more characters.  
+- \*  is a wildcard and represents one or more characters.  
 
 ```{bash}
 ls .
@@ -163,17 +163,17 @@ ls ../R*
 Your first sequencing run finished and you've received an email from the facility that your data are ready. Now what? Depending on the facility, you may use `ftp`, `wget`, or `curl` to download the data. Today, we'll use `wget` (World Wide Web get). The `-O` argument specifies the filename to save the file to.
 
 ```{bash}
-wget https://www.dropbox.com/s/75blb8gxc1zsm3f/TestSeq_S152_L002_R1_001.fastq.gz?dl=0 -O ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz  
+wget https://www.dropbox.com/s/75blb8gxc1zsm3f/TestSeq_S152_L002_R1_001.fastq.gz?dl=0 -O S152_L002_R1_001.fastq.gz  
 
-wget https://www.dropbox.com/s/8la6oad5zmk42y9/TestSeq_S152_L002_R2_001.fastq.gz?dl=0 -O ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz
+wget https://www.dropbox.com/s/8la6oad5zmk42y9/TestSeq_S152_L002_R2_001.fastq.gz?dl=0 -O S152_L002_R2_001.fastq.gz
 ```
 
-These commands will download forward (R1) and reverse (R2) RADseq reads of _Quercus boyntonii_. These are the product of Illumina "paired end" sequencing, and the files are named according to the adapters used during sequencing (which makes for the awfully long file name!)
+These commands will download forward (R1) and reverse (R2) RADseq reads of _Quercus boyntonii_. These are the product of Illumina "paired end" sequencing.
 
 Let's take a look at one of these files using `cat`. 
 
 ```{bash}
-cat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz
+cat S152_L002_R1_001.fastq.gz
 ```
 
 AH! Too much data and it looks garbled. Hit **Ctl+c (^c)** to quit a running process or abort a task. This is one of the most important commands you'll learn today! We can see that the file is of type "fastq.gz": the ".gz" indicates the file has been compressed. File compression can save huge amounts of space! 
@@ -181,7 +181,7 @@ AH! Too much data and it looks garbled. Hit **Ctl+c (^c)** to quit a running pro
 If you want to observe this compressed data in a more manageable way, we can use the command `zcat` (which allows us to look at "zipped" data) and then "pipe"" the output of that to the `less` command using the '|' ***operator***. 
 
 ```{bash}
-zcat ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz | less
+zcat S152_L002_R1_001.fastq.gz | less
 ```
 Like the manual pages, we can use the space bar to scroll the output of `less`, and 'q' to quit. In this file 
 
@@ -189,8 +189,8 @@ Let's decompress the files using `gunzip`.
 
 ```{bash}
 clear
-gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz > QUBO_S152_R1.fastq
-gunzip -c ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz > QUBO_S152_R2.fastq
+gunzip -c S152_L002_R1_001.fastq.gz > QUBO_S152_R1.fastq
+gunzip -c S152_L002_R2_001.fastq.gz > QUBO_S152_R2.fastq
 ```
 
 The '>' is another ***operator*** , which redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. The '|' operator passes the output of a command to a different command; the '>' and '>>' operators pass the output of a command to a text file.
@@ -224,14 +224,14 @@ An explanation of all this output is below--but don't worry too much about each 
 One of the first things I do when I get new data is I make a backup of it that is write protected. Let's do that now using the `mv` command. Depending on how it is used, `mv` can either rename a file or move a file to somewhere else.  
 ```{bash}
 mkdir dataBackup
-mv ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz dataBackup
+mv S152_L002_R*_001.fastq.gz dataBackup
 cd dataBackup
 ls -l
 ```
 These commands make a copy of the data in a new directory called "dataBackup", then list the permissions for the files. We can modify the permissions of files using the command `chmod` (change modifications) and flags to add or remove read, write, or execute ability. Our goal right now is to change permissions on this file so that you (the owner) no longer have write permissions. We do this by calling `chmod` and subtracting (-) the write permission (`-w`).
 
 ```{bash}
-chmod -w ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz
+chmod -w S152_L002_R*_001.fastq.gz
 ```
 We can use our `ls` again to check that we've changed the permissions. 
 
@@ -242,7 +242,7 @@ ls -l
 And, we can prove to ourselves that we have modified the permissions by trying to delete the files using `rm`
 
 ```{bash}
-rm ATGCCGCT-CTCCTTAC_S152_L002_R*_001.fastq.gz
+rm S152_L002_R*_001.fastq.gz
 ```
 
 The output should ask if you actually want to remove the write-protected files. You should answer with an 'n'.  
