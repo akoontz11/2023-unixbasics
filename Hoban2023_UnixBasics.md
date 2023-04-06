@@ -34,7 +34,7 @@ Check out the source panel for scripting, the Console/Terminal, environment and 
 <img width="1673" alt="Screen Shot 2021-08-29 at 11 44 30 AM" src="https://user-images.githubusercontent.com/10552484/131260953-acb91b54-1d3b-4041-b534-9925a8ee9166.png">
 
 
-## Natigation: Here we go! 
+## Navigation: Here we go! 
 Let's orient ourselves.  Click the Terminal tab in the Console/Terminal/Render/Background Jobs pane, in the lower left for the default configuration. Feel free to expand the window.
 
 The command prompt begins with your username @ ip-adress and a colon (:), then a tilde (~) for your home ***directory*** and a `$` indicating the beginning of a shell prompt. Print your working directory by entering `pwd`, our first command. This command returns where you are in the structure of the server.
