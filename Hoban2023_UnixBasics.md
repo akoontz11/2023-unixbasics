@@ -71,7 +71,7 @@ Let's list the contents of one of those directories using the `ls` command and a
 
 If you start typing "dem", and hit ***\<TAB>*** the computer will auto-complete for "demoFolder". If there are multiple matches, it will only auto-complete as far as the matching part. If you hit ***\<TAB> \<TAB>***, it will list the possible matches.  **USE TAB-COMPLETE!** This will reduce mistakes and make you more efficient. You can also scroll-up in your command history by pressing the up- and down-arrow keys. 
 
-Also, some of the longer commands in this exercise you may wish to copy/paste. In order to paste into Terminal, use the keyboard shortcut ***Ctrl + Shift + V***.
+Also, some of the longer commands in this exercise you may wish to copy/paste. On the GitHub page for this Markdown file, you can copy by using ***Ctrl + c*** or by clicking the copy button that appears on the far right of each code snippet box. To paste into Terminal, use the keyboard shortcut ***Ctrl + Shift + v***.
 
 ---
 
