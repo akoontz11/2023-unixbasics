@@ -14,9 +14,9 @@ library(kableExtra)
 
 # Specify the filepath to the zipped fastq files we downloaded using wget
 R1_infile <- 
-  "~/demoFolder/data_backup/ATGCCGCT-CTCCTTAC_S152_L002_R1_001.fastq.gz"
+  "~/demoFolder/data_backup/S152_L002_R1_001.fastq.gz"
 R2_infile <- 
-  "~/demoFolder/data_backup/ATGCCGCT-CTCCTTAC_S152_L002_R2_001.fastq.gz"
+  "~/demoFolder/data_backup/S152_L002_R2_001.fastq.gz"
 # Generate a fastqq object, which summarizes of zipped fastq files
 R1_seq <- seqTools::fastqq(R1_infile)
 print(R1_seq)
