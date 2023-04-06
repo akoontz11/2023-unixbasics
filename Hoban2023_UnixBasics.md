@@ -5,29 +5,29 @@ This session is a broad overview of the command line interface, with a focus on 
 
 ## Goals
 By the end of this session, you should be familiar with the following:  
-* Command lines, why they're useful, and how to implement them
-* Navigating different directories on your system (`pwd`, `cd`, `ls`)
-* Assessing and changing file permissions (`ls -l`, `chmod`)
+* Command lines, why they're useful, how to implement them
+* Navigating directories on your system (`pwd`, `cd`, `ls`)
+* Assessing/changing file permissions (`ls -l`, `chmod`)
 * Moving/downloading data (`wget`, `curl`, `scp`)
 * Viewing, copying, moving files (`head`, `tail`, `more`, `less`, `cat`, `rm`, `mv`, `mkdir`)
 * Running R scripts from the command line (`Rscript`, `nohup`)
 
-We'll download raw sequence data, make backups, and analyze the quality of the data. For the ***Exercises*** below, try to come up with an answer on your own before revealing the solution (clicking the "Details" dropdown arrow).
+We'll download raw sequence data, make backups, and analyze the quality of the data. For the 3 ***Exercises*** below, try to come up with an answer on your own before revealing the solution (clicking the "Details" dropdown arrow).
 
 ## Background and Terminology
-In this exercise, we'll be working in the **command line interface (CLI)**  for Linux. This is different from a **graphical user interface (GUI)**, which is used when you open a Windows or Mac computer. Instead of moving your mouse over an icon on your desktop and double-clicking it to run, we'll initiate programs using text delivered on the command line. 
+We'll be working in the **command line interface (CLI)**  for Linux. This is different from a **graphical user interface (GUI)**, which is used when you open a Windows or Mac computer. Instead of moving your mouse over an icon on your desktop and double-clicking it to run, we'll initiate programs using text delivered on the command line. 
 
-So what is the command line? Essentially, a **command** is a string of text that, through the use of a command-line interpreter (usually the program **Terminal**), tells the computer what to do. The command line connects the user to a computer operating system, on your own computer or a remote server. To communicate with the computer, we typically use a **shell**, called such because it wraps around the outside of the "core" part of a computer (termed the **kernel**). Specifically, today we'll be using a shell named "Bourne Again Shell"--or, more commonly, **BASH**.
+So what is the command line? Essentially, a **command** is a string of text that, through the use of a command-line interpreter (usually the program **Terminal**), tells the computer what to do. The command line connects the user to an operating system, on your own computer or a remote server. To communicate with the computer, we typically use a **shell**, called such because it wraps around the outside of the "core" part of a computer (termed the **kernel**). Specifically, today we'll be using a shell named "Bourne Again Shell"--or, more commonly, **BASH**.
 
 ## Motivation
-Almost everyone who's used to normally working in a GUI finds the use of a CLI burdensome. So, why should we go through this exercise? 
+Almost everyone who's used to working in a GUI finds the use of a CLI burdensome. So why should we put ourselves through this? 
 
 1. *Necessity*: many widely used programs (e.g. for population genetics, [ipyrad](https://ipyrad.readthedocs.io/en/master/3-installation.html), [Stacks](https://catchenlab.life.illinois.edu/stacks/)) can only be run in a Linux (or Unix) environment. Learning the steps here allows you to install and run these programs.
-2. *Supportability*: Linux is cool because, unlike Mac OS or Windows, it's entirely open-source. If you have an issue on your Mac/Windows OS, you have to contact IT or the support team for Apple/Microsoft. If you have an issue on a Linux OS, you do the same thing that you do when you encounter an error in R or Python: Google it, look at the relevant post on Stack Overflow, and make the fix yourself. Linux is supportable because it's open-source. 
+2. *Supportability*: Linux is cool because unlike Mac OS or Windows, it's entirely open-source. On your Mac/Windows OS, if you have an issue, you have to contact IT or the support team for Apple/Microsoft. If you have an issue on a Linux OS, you do the same thing you'd do when encountering an error in R or Python: Google it, look at the relevant post on Stack Overflow, and make the fix yourself. Linux is supportable because it's open-source. 
 3. *Reproducibility*: Unlike a GUI, working in a CLI allows for complete reproducibility. The commands used to install and run a program on one computer can be used across systems to achieve identical results.
 
 ## Getting started: Log onto the Hoban Lab server 
-Sign in to the [Hoban Lab server](http://10.129.0.151:8787/auth-sign-in?appUri=%2F), using the username and password Austin has given to you. After providing your information, you'll be taken a screen that matches what you would see if you were to open RStudio on your personal desktop. This is RStudio-Server: you're running RStudio on the lab's Linux server. 
+Sign in to the [Hoban Lab server](http://10.129.0.151:8787/auth-sign-in?appUri=%2F), using the username and password Austin gave you. After providing your information, you'll be taken a screen matching what you'd see if you were to open RStudio on your personal desktop. This is RStudio-Server: you're running RStudio on the lab's Linux server. 
 
 Check out the source panel for scripting, the Console/Terminal, environment and history pane, and the files, viewer, packages, and help pane. You can customize this if you like.  
 
@@ -37,7 +37,7 @@ Check out the source panel for scripting, the Console/Terminal, environment and 
 ## Natigation: Here we go! 
 Let's orient ourselves.  Click the Terminal tab in the Console/Terminal/Render/Background Jobs pane, in the lower left for the default configuration. Feel free to expand the window.
 
-The command prompt begins with your username @ ip-adress and a colon (:), then a tilde (~) for your home ***directory*** and a `$` indicating the beginning of a shell prompt. Print your working directory with `pwd`, our first command. This command returns where you are in the structure of the server.
+The command prompt begins with your username @ ip-adress and a colon (:), then a tilde (~) for your home ***directory*** and a `$` indicating the beginning of a shell prompt. Print your working directory by entering `pwd`, our first command. This command returns where you are in the structure of the server.
 
 ```{bash}
 user1@ip-<###>-<##>-<##>-<###>:~$ pwd
@@ -47,7 +47,7 @@ Returns for me:
 ```{bash}
 /home/akoontz
 ```
-The forward slash (/) at the beginning indicates the ***root*** directory: that's the top-level of the server, and everything lives below that. This is the first ***path*** we'll see. This is an ***absolute path*** which is like a complete address, in this case starting from the root. A ***relative path*** starts from your current directory. An absolute path is similar to having the GPS coordinates for a destination, whereas a relative path is similar to getting directions to a destination based on where you currently are.
+The forward slash (/) at the beginning indicates the ***root*** directory: that's the top-level of the server, and _everything_ lives below that. This is the first ***path*** we'll see. This is an ***absolute path*** which is like a complete address, in this case starting from the root. A ***relative path*** starts from your current directory. An absolute path is similar to having the GPS coordinates for a destination, whereas a relative path is similar to getting directions to a destination based on where you currently are.
 
 What else is in your home directory? Use `ls` to list the contents of your home directory. 
 
@@ -63,7 +63,7 @@ Music      Public    Templates  Tutorials
 
 RStudio color encodes light blue for directories, black for files, and red for executables. 
 
-Let's list one of those directories using the `ls` command and an ***argument***, `demoFolder`. This is the basic format of shell programming, like many other languages. 
+Let's list the contents of one of those directories using the `ls` command and an ***argument***, `demoFolder`. This is the basic format of shell programming, like many other languages. 
 
 ---
 
@@ -84,7 +84,7 @@ Returns:
 Rscript_QCkitFastQ.R  demo_file.txt  DNA_16pops_migLow_1.arb  DNA_16pops_migLow_1.simparam draft_fscParams_lowMutation.sh
 ```
 
-Arguments often have **flags** to modify the execution of a command. Single dash ***-*** have single-character options. Double-dash ***--*** have multi-character options. Which flags can you use to modify the `ls` command? How do you find out? 
+Arguments often have **flags** to modify the execution of a command. Single dash ***-*** have single-character options; double-dash ***--*** have multi-character options. Which flags can you use to modify the `ls` command? How do you find out? 
 
 When in doubt with many programs, useful documentation is often provided with the `--help` argument. 
 
@@ -98,7 +98,7 @@ man ls
 ```
 You can use the space bar to scroll through the man page, and can press ***q*** to quit. 
 
-Let's sort the demoFolder by the most recently modified files with the `-t` flag. (For more advanced users: what else do you use often?)
+Let's sort the demoFolder by the most recently modified files with the `-t` flag. (For more advanced users: what else do you use often for listing files?)
 
 ```{bash}
 ls demoFolder -t
@@ -110,7 +110,7 @@ What do the `-h` and `-l` flags provide? Note that flags can be strung together 
 ls demoFolder/ -lth
 ```
 
-Let's change directories with `cd`, into the `R` folder. What's in this directory? 
+Let's **c**hange **d**irectories with `cd`, into the `R` folder. What's in this directory? 
 
 ```{bash}
 cd ~/R
@@ -170,7 +170,7 @@ wget https://www.dropbox.com/s/8la6oad5zmk42y9/TestSeq_S152_L002_R2_001.fastq.gz
 
 These commands will download forward (R1) and reverse (R2) RADseq reads of _Quercus boyntonii_. These are the product of Illumina "paired end" sequencing.
 
-Let's take a look at one of these files using `cat`. 
+Once the downloads are complete, let's take a look at one of these files using `cat`. 
 
 ```{bash}
 cat S152_L002_R1_001.fastq.gz
@@ -178,14 +178,14 @@ cat S152_L002_R1_001.fastq.gz
 
 AH! Too much data and it looks garbled. Hit **Ctl+c (^c)** to quit a running process or abort a task. This is one of the most important commands you'll learn today! We can see that the file is of type "fastq.gz": the ".gz" indicates the file has been compressed. File compression can save huge amounts of space! 
 
-If you want to observe this compressed data in a more manageable way, we can use the command `zcat` (which allows us to look at "zipped" data) and then "pipe"" the output of that to the `less` command using the '|' ***operator***. 
+If you want to observe this compressed data in a more manageable way, we can use the command `zcat` (which allows us to look at "zipped" data) and then "pipe"" the output of that to the `less` command using the '|' ***operator***. Give it a try.
 
 ```{bash}
 zcat S152_L002_R1_001.fastq.gz | less
 ```
-Like the manual pages, we can use the space bar to scroll the output of `less`, and 'q' to quit. In this file 
+Like the manual pages, we can use the space bar to scroll the output of `less`. We'll talk about the [FASTQ format](https://en.wikipedia.org/wiki/FASTQ_format) more below, but you can see that the 2nd line of each entry contains the raw sequence data. The characters in the 4th line symbolize the quality score of each base call in the 2nd. For now, let's exit using ***q***.
 
-Let's decompress the files using `gunzip`.
+Decompress the files using `gunzip`.
 
 ```{bash}
 clear
@@ -193,7 +193,7 @@ gunzip -c S152_L002_R1_001.fastq.gz > QUBO_S152_R1.fastq
 gunzip -c S152_L002_R2_001.fastq.gz > QUBO_S152_R2.fastq
 ```
 
-The '>' is another ***operator*** , which redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. The '|' operator passes the output of a command to a different command; the '>' and '>>' operators pass the output of a command to a text file.
+The '>' is another ***operator*** , which redirects the text that would otherwise be printed to the Terminal window (called standard output) into a new text file. The '|' operator passes the output of a command to a different command; the '>' and '>>' operators pass the output of a command to a file.
 
 Let's use our familiar `ls` command with some additional options, to see the difference in file size between compressed and uncompressed files. Again, the `l` stands for 'long' format, which means more detailed information is provided for each file. The `h` means 'human-readable' file sizes, and `t` sorts by date modified. Don't forget you can always use `man ls` to see all the detailed options.
 
@@ -214,14 +214,14 @@ An explanation of all this output is below--but don't worry too much about each 
 - Column 2 tells us about how many links are to this file.
 - Column 3 tells us about who is the owner of the file/directory.
 - Column 4 tells us about who is the group owner of the file/directory.
-- Column 5 tells us about the size of the file/directory in bytes unit (the `-h` flag makes it human-readable: bytes, kilobytes, megabytes, etc.)
+- Column 5 tells us about the size of the file/directory in bytes (the `-h` flag makes it human-readable: bytes, kilobytes, megabytes, etc.)
 - Column 6 provides the abbreviated month, day-of-month file was last modified, hour file last modified, minute file last modified. 
 - Column 7 is the file or directory path name.
 ---
 
 ## Modifying permissions and backing up raw data 
 
-One of the first things I do when I get new data is I make a backup of it that is write protected. Let's do that now using the `mv` command. Depending on how it is used, `mv` can either rename a file or move a file to somewhere else.  
+One of the first things I do when I get new data is I make a backup of it that is write protected. Let's do that now using the `mv` command. Depending on how it is used, `mv` can either rename a file or move it somewhere else.  
 ```{bash}
 mkdir dataBackup
 mv S152_L002_R*_001.fastq.gz dataBackup
@@ -247,7 +247,7 @@ rm S152_L002_R*_001.fastq.gz
 
 The output should ask if you actually want to remove the write-protected files. You should answer with an 'n'.  
 
-**In Linux: always be very, very careful about calling the `rm` command.** If you delete a file using `rm`, you delete it forever! Using the command `rm -r` will delete folders.  
+**In Linux: always be very, very careful about calling the `rm` command.** If you delete a file using `rm`, you delete it forever! Using the command `rm -r` will delete folders, and their contents, forever.  
 
 ---
 **_Tip: file names in Linux_**
@@ -255,8 +255,8 @@ The output should ask if you actually want to remove the write-protected files. 
 As you create files and folders in Linux, remember:  
 
 1. File names that start with a period are hidden. You can view them with **ls -a**  
-2. BASH is case-sensitive. file1.txt and File1.txt are different. Be consistent.  
-3. Avoid spaces in file names. Use file1 or File_1 or file-1 or snakeCase. I prefer underscores because R interprets - as subtraction.  
+2. BASH is case-sensitive. file1.txt and File1.txt are different
+3. Avoid spaces in file names. Use file1 or File_1 or file-1 or snakeCase. I prefer underscores because R interprets - as subtraction
 
 ---
 
@@ -281,7 +281,7 @@ You can do the same with `tail` for the end of the file. Both commands have an o
 tail -n 4 raw_fastq/QUBO_S152_R1.fastq
 ```
 
-You can read more about the fastq file encoding [here](https://en.wikipedia.org/wiki/FASTQ_format). Fastqc uses these data to generate a really useful report. 
+Fastqc uses the [fields in the fastq](https://en.wikipedia.org/wiki/FASTQ_format) file to generate a report about the quality patterns seen across samples. The first line (the header) contains [interesting information](https://learn.gencore.bio.nyu.edu/ngs-file-formats/fastq-format/) about instrument name, flowcell ID, etc.
 
 Let's check how many reads we have in each file using `wc` (word count). By default, using `wc` on a file gives three columns with the number of lines, the number of words, and the number of characters. We can ask for only the number of lines using the `-l` flag. 
 
@@ -326,7 +326,7 @@ Now, let's run fastqc.
 fastqc raw_fastq/*.fastq -o quality_metrics/
 ```
 
-While this is running, look through the  [good](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) and [bad](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html) report examples, and [common fast-qc red flags](https://www.dna-ghost.com/single-post/2017/09/01/How-to-interpret-FASTQC-results). 
+While this is running, look through the [good](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) and [bad](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html) report examples, and [common fast-qc red flags](https://www.dna-ghost.com/single-post/2017/09/01/How-to-interpret-FASTQC-results). Note that all red doesn't necessarily mean your data is bad, and all green doesn't necessarily mean your data is good!
 
 **Exercise 3: What did fastqc create?**
 <details>
@@ -372,7 +372,7 @@ R2_seq <- seqTools::fastqq(R2_infile)
 Instead of waiting for output while an R script runs, there are two ways we can get this script to run in the background, while we do other stuff:
 
 #### RStudio background jobs
-The first approach is to use the "Background jobs" tab in RStudio. This allows you to specify a script, and have that script run in the background while the main window of RStudio can still be used. You're also given the option of copying the output from that script into the current global environment.
+The first approach uses the "Background jobs" tab in RStudio. This allows you to specify a script and have it run in the background while the main window of RStudio can still be used. You're also given the option of copying the output from that script into the current global environment (once the script completes).
 
 #### BASH nohup command
 The second approach allows you to fire off a process in the "background" of Terminal. Normally, if you wanted to run an R script from Terminal, you would use a command like:
