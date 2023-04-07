@@ -12,7 +12,7 @@ By the end of this session, you should be familiar with the following:
 * Viewing, copying, moving files (`head`, `tail`, `more`, `less`, `cat`, `rm`, `mv`, `mkdir`)
 * Running R scripts from the command line (`Rscript`, `nohup`)
 
-We'll download raw sequence data, make backups, and analyze the quality of the data. For the 3 ***Exercises*** below, try to come up with an answer on your own before revealing the solution (clicking the "Details" dropdown arrow). We'll pause at each exercise for folks to ask questions.
+We'll download raw sequence data, make backups, and analyze the quality of the data. For the 2 ***Exercises*** below, try to come up with an answer on your own before revealing the solution (clicking the "Details" dropdown arrow). We'll pause at each exercise for folks to ask questions.
 
 ## Background and Terminology
 We'll be working in the **command line interface (CLI)**  for Linux. This is different from a **graphical user interface (GUI)**, which is used when you open a Windows or Mac computer. Instead of moving your mouse over an icon on your desktop and double-clicking it to run, we'll initiate programs using text delivered on the command line. 
@@ -288,7 +288,7 @@ Let's check how many reads we have in each file using `wc` (word count). By defa
 ```{bash}
 wc -l raw_fastq/QUBO_S152_R1.fastq
 ```
-**Exercise 2: How many reads are there?**
+**Exercise 1: How many reads are there?**
 <details>
 	There are 30 million lines in each file. Given that there are 4 lines per 1 sequence read in a .fastq file, there are ~7.6 million reads in each file. 
 </details>
@@ -328,7 +328,7 @@ fastqc raw_fastq/*.fastq -o quality_metrics/
 
 While this is running, look through the [good](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) and [bad](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html) report examples, and [common fast-qc red flags](https://www.dna-ghost.com/single-post/2017/09/01/How-to-interpret-FASTQC-results). Note that all red doesn't necessarily mean your data is bad, and all green doesn't necessarily mean your data is good!
 
-**Exercise 3: What did fastqc create?**
+**Exercise 2: What did fastqc create?**
 <details>
 
 `ls -l` shows two new files for each .fastq file.
@@ -378,13 +378,13 @@ The first approach uses the "Background jobs" tab in RStudio. This allows you to
 The second approach allows you to fire off a process in the "background" of Terminal. Normally, if you wanted to run an R script from Terminal, you would use a command like:
 
 ```{bash}
-Rscript demo_QCkitFastQ.R
+Rscript ~/demoFolder/demo_QCkitFastQ.R
 ```
 
 If you want to run this (or any BASH) command in the background, you preface it with the command `nohup`, which stands for "no hangups". Importantly, you end the command string with the `&` symbol, giving you the string below:
 
 ```{bash}
-nohup Rscript demo_QCkitFastQ.R &
+nohup Rscript ~/demoFolder/demo_QCkitFastQ.R &
 ```
 
 When you run this command, you won't see anything printed to the standard output. Instead, you'll see a new file in your current working directory called "nohup.text". If you look at the contents of this file (`less nohup.text`), you'll see that it's what would typically be printed to the "Console" tab of your RStudio window--the output.
